@@ -1,0 +1,37 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+   >
+
+    <ViewSettingsDialog
+        id="viewSettingsDialog"
+        confirm=".onConfirmViewSettingsDialog" resetFilters="onResetFIlters">
+        <sortItems>
+            <ViewSettingsItem
+                text="{i18n>listSort1}"
+                key="Name1"
+                selected="true"/>
+            <ViewSettingsItem text="{i18n>listSort2}" key="Name2"/>
+            <ViewSettingsItem text="{i18n>listSort3}" key="IdHead"/>
+        </sortItems>
+        <filterItems >
+            <ViewSettingsCustomItem key="Name1" text="{i18n>listFilter1}" >
+                <customControl>
+                    <SearchField />
+                </customControl>
+            </ViewSettingsCustomItem>
+            <ViewSettingsCustomItem key="Name2" text="{i18n>listFilter2}">
+                <customControl>
+                    <SearchField />
+                </customControl>
+            </ViewSettingsCustomItem>
+            <ViewSettingsCustomItem key="IdHead" text="{i18n>listFilter3}">
+                 <customControl>
+                    <SearchField />
+                </customControl>
+            </ViewSettingsCustomItem>
+        </filterItems>
+
+    </ViewSettingsDialog>
+</core:FragmentDefinition>

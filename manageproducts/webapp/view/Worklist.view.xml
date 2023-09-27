@@ -1,0 +1,166 @@
+<mvc:View
+    controllerName="opensap.manageproducts.controller.Worklist"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:semantic="sap.f.semantic"
+    xmlns:l="sap.ui.layout">
+
+    <semantic:SemanticPage
+        id="page"
+        headerPinnable="false"
+        toggleHeaderOnTitleClick="false">
+
+        <semantic:titleHeading>
+            <Title
+                text="{i18n>worklistTitle}"
+                level="H2"/>
+        </semantic:titleHeading>
+
+        <semantic:content>
+        <IconTabBar
+		id="idIconTabBar"
+		select="onFilterSelect"
+		class="sapUiResponsiveContentPadding">
+		<items>
+			<IconTabFilter
+				showAll="true"
+				count="{/ProductCollectionStats/Counts/Total}"
+				text="Products"
+				key="All" />
+			<IconTabSeparator />
+			<IconTabFilter
+				icon="sap-icon://begin"
+				iconColor="Positive"
+				count="{/ProductCollectionStats/Counts/Weight/Ok}"
+				text="cheap"
+				key="cheap" />
+			<IconTabFilter
+				icon="sap-icon://compare"
+				iconColor="Critical"
+				count="{/ProductCollectionStats/Counts/Weight/Heavy}"
+				text="moderate"
+				key="moderate" />
+			<IconTabFilter
+				icon="sap-icon://inventory"
+				iconColor="Negative"
+				count="{/ProductCollectionStats/Counts/Weight/Overweight}"
+				text="expensive"
+				key="expensive" />
+		</items>
+            <content>
+            <Table
+                id="table"
+                width="auto"
+                items="{
+                    path: '/ProductSet',
+                    parameters: {
+                        expand : 'ToSupplier'
+                    },
+                    sorter: {
+                        path: 'ProductID',
+                        descending: false
+                    }
+                }"
+                noDataText="{worklistView>/tableNoDataText}"
+                busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+                growing="true"
+                growingScrollToLoad="true"
+                updateFinished=".onUpdateFinished">
+
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title
+                            id="tableHeader"
+                            text="{worklistView>/worklistTableTitle}"
+                            level="H3"/>
+                        <ToolbarSpacer />
+                        <Button id="addButton" icon="sap-icon://add" press="onAdd"></Button>
+                        <SearchField
+                            id="searchField"
+                            tooltip="{i18n>worklistSearchTooltip}"
+                            search=".onSearch">
+                            <layoutData>
+                                <OverflowToolbarLayoutData
+                                    maxWidth="200px"
+                                    priority="NeverOverflow"/>
+                            </layoutData>
+                        </SearchField>
+                    </OverflowToolbar>
+                </headerToolbar>
+
+                <columns>
+                    <Column id="nameColumn">
+                        <Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
+                    </Column>
+                    <Column id="supplierNameColumn" demandPopin="false" minScreenWidth="Tablet">
+                        <Text text="{i18n>tableSupplierNameColumnTitle}" id="supplierNameColumnTitle"/>
+                    </Column>
+                    <Column id="webAddressColumn" demandPopin="false" minScreenWidth="Tablet">
+                        <Text text="{i18n>tableWebAddressColumnTitle}" id="webAddressColumnTitle"/>
+                    </Column>
+                    <Column id="unitNumberColumn" hAlign="End">
+                        <Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem
+                        type="Navigation"
+                        press=".onPress">
+                        <cells>
+                            <ObjectIdentifier
+                                titleActive="true"
+                                titlePress="onShowPopover"
+                                title="{ProductID}"
+                                text="{Name}"/>
+                            <Text text="{SupplierName}"></Text>
+                            <Link href="{ToSupplier/WebAddress}" text="{ToSupplier/WebAddress}"></Link>
+                            <ObjectNumber
+                                number="{
+                                    path: 'Price',
+                                    formatter: '.formatter.numberUnit'
+                                }"
+                                unit="{CurrencyCode}"
+                                 />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+            </content>
+            </IconTabBar>
+        </semantic:content>
+        <semantic:dependents>
+            <ResponsivePopover class="sapUiPopupWithPadding"
+                id="dimensionsPopover" title="Product Dimensions">
+                <content>
+                    <l:Grid >
+                        <l:content>
+                            <Text text="Width : {
+                                path : 'Width',
+                                formatter : '.formatter.numberUnit'
+                            } {DimUnit}"></Text>
+                            <Text text="Depth: {
+                            path: 'Depth',
+                            formatter: '. formatter.numberUnit'
+                            } {DimUnit}" />
+                            <Text text="Height: {
+                            path: 'Height',
+                            formatter: '. formatter.numberUnit'
+                            } {DimUnit}" />
+                            <Text text="Weight: {
+                            path: 'WeightMeasure',
+                            formatter: '. formatter.numberUnit'
+                            } {WeightUnit}" />
+                        </l:content>
+                    </l:Grid>
+                </content>
+            </ResponsivePopover>
+        </semantic:dependents>
+
+        <semantic:sendEmailAction>
+            <semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+        </semantic:sendEmailAction>
+
+    </semantic:SemanticPage>
+
+</mvc:View>

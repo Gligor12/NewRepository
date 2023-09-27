@@ -1,0 +1,225 @@
+<mvc:View
+    controllerName="opensap.project1.controller.Detail"
+    xmlns="sap.m"
+    xmlns:semantic="sap.f.semantic"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form">
+
+    <semantic:SemanticPage
+        id="detailPage"
+        busy="{detailView>/busy}"
+        busyIndicatorDelay="{detailView>/delay}" showFooter="true" 
+        headerPinnable="false" 
+        toggleHeaderOnTitleClick="false">
+        <semantic:titleHeading>
+            <Title
+                text="{i18n>detailPageTitle} {IdHead}"
+                level="H1"
+                titleStyle="H1" />
+        </semantic:titleHeading>
+        <semantic:headerContent>
+           <Panel headerText="{i18n>panelHeaderText}" >
+                <f:SimpleForm title="{i18n>generalInfoFormTitle}" id="editEmployeeForm">
+                    <f:content>
+                    <Label text="{i18n>IDLabel}" class="sapUiTinyMarginTop"/>
+                    <Input id="idEmployee" required="true" value="{IdHead}" enabled="false" />
+                    <Label text="{i18n>firstNameLabel}" class="sapUiTinyMarginTop"/>
+                    <Input id="firstName" required="true" value="{Name1}" enabled="false" />
+                    <Label text="{i18n>lastNameLabel}" class="sapUiTinyMarginTop" />
+                    <Input id="lastName" required="true" value="{Name2}" enabled="false" />
+                    <Label text="{i18n>addressLabel}" class="sapUiTinyMarginTop" />
+                    <Input id="street" required="true" value="{Street}" enabled="false" />
+			    </f:content>
+                </f:SimpleForm>
+           </Panel>
+        </semantic:headerContent>
+        <semantic:content>
+            <IconTabBar select="onFilterSelect">
+                <items>
+                    <IconTabFilter icon="sap-icon://workflow-tasks">
+                        <Table
+                            id="lineItemsList"
+                            width="auto"
+                            items="{H2P}"
+                            updateFinished=".onListUpdateFinished"
+                            noDataText="{i18n>detailLineItemTableNoDataText}"
+                            busyIndicatorDelay="{detailView>/lineItemTableDelay}"
+                            selectionChange="onProjectSelectionChange">
+                            <headerToolbar>
+                                <Toolbar>
+                                    <Title
+                                        id="lineItemsTitle"
+                                        text="{i18n>projectTableTitle}"
+                                        titleStyle="H5"
+                                        level="H5"/>
+                                    <Button icon="sap-icon://add" id="addProjectBtn" press="onAddProject" />
+                                    <Button icon="sap-icon://edit" id="editProjectBtn" press="onEditProject" />
+                                </Toolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column>
+                                    <Text text="{i18n>detailLineItemTableIDColumn}"/>
+                                </Column>
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true">
+                                    <Text text="{i18n>tableProjectNameColumn}"/>
+                                </Column>
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true">
+                                    <Text text="{i18n>tableCustomerColumn}"/>
+                                </Column>
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true">
+                                    <Text text="{i18n>tableProjectStatusColumn}"/>
+                                </Column>
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true">
+                                    <Text text="{i18n>tableProjectTopicColumn}"/>
+                                </Column>
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true">
+                                    <Text text="{i18n>tableProjectPeriodOfTime}"/>
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem>
+                                    <cells>
+                                       <Input value="{IdProjects}" enabled="false"/>
+                                       <Input value="{Projname}" enabled="false"/>
+                                       <Input value="{Customer}" enabled="false"/>
+                                       <Input value="{Status}" enabled="false"/>
+                                       <Input value="{Topic}" enabled="false"/>
+                                       <DateRangeSelection value="{Periodoftime}" enabled="false"/>
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </IconTabFilter>
+                    <IconTabFilter icon="sap-icon://study-leave">
+                        <Table
+                            id="lineItemsSkillList"
+                            width="auto"
+                            items="{H2S}"
+                            updateFinished=".onListUpdateFinished"
+                            noDataText="{i18n>detailLineItemSkillTableNoDataText}"
+                            busyIndicatorDelay="{detailView>/lineItemTableDelay}"
+                            selectionChange="onSkillSelectionChange">
+                            <headerToolbar>
+                                <Toolbar>
+                                    <Title
+                                        id="lineItemsSkillTitle"
+                                        text="{i18n>skillTableTitle}"
+                                        titleStyle="H5"
+                                        level="H5"/>
+                                    <Button icon="sap-icon://add" id="addSkillBtn" press="onAddSkill" />
+                                    <Button icon="sap-icon://edit" id="editSkillBtn" press="onEditSkill" />
+                                </Toolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column>
+                                    <Text text="{i18n>skillIDColumn}"/>
+                                </Column>
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true">
+                                    <Text text="{i18n>tableSkillNameColumn}"/>
+                                </Column>
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true">
+                                    <Text text="{i18n>tableSkillDateColumn}"/>
+                                </Column>
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true">
+                                    <Text text="{i18n>tableSkillTopicColumn}"/>
+                                </Column>
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true">
+                                    <Text text="{i18n>tableSkillLevelColumn}"/>
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem>
+                                    <cells>
+                                       <Input value="{IdSkills}" enabled="false"/>
+                                       <Input value="{Name}" enabled="false"/>
+                                       <DateTimePicker value="{ path : 'Edate' , 
+                                            type: 'sap.ui.model.type.DateTime'}" enabled="false"/>
+                                       <Input value="{Topic}" enabled="false"/>
+                                       <Input value="{Dlevel}" enabled="false"/>
+                                       
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+
+            
+        </semantic:content>
+        
+        <semantic:footerCustomActions>
+            <Button id="editEmployee" icon="sap-icon://edit" press="onEditEmployee" />
+        </semantic:footerCustomActions>
+        <semantic:footerCustomActions>
+            <Button id="saveEdit" text="{i18n>saveButton}" press="onSaveEdit" visible="false"/>
+        </semantic:footerCustomActions>
+         <semantic:footerCustomActions>
+            <Button id="cancelEdit" text="{i18n>cancelButton}" press="onCancelEdit" visible="false" />
+        </semantic:footerCustomActions>
+
+        <semantic:footerCustomActions>
+            <Button id="saveEditProject" text="{i18n>saveButton}" press="onSaveEditProject" visible="false"/>
+        </semantic:footerCustomActions>
+        <semantic:footerCustomActions>
+            <Button id="cancelEditProject" text="{i18n>cancelButton}" press="onCancelEditProject" visible="false" />
+        </semantic:footerCustomActions>
+         <semantic:footerCustomActions>
+            <Button id="deleteProject" icon="sap-icon://delete" visible="false" press="onDeleteProject" />
+        </semantic:footerCustomActions>
+
+        <semantic:footerCustomActions>
+            <Button id="saveEditSkill" text="{i18n>saveButton}" press="onSaveEditSkill" visible="false"/>
+        </semantic:footerCustomActions>
+        <semantic:footerCustomActions>
+            <Button id="cancelEditSkill" text="{i18n>cancelButton}" press="onCancelEditSkill" visible="false" />
+        </semantic:footerCustomActions>
+         <semantic:footerCustomActions>
+            <Button id="deleteSkill" icon="sap-icon://delete" visible="false" press="onDeleteSkill" />
+        </semantic:footerCustomActions>
+
+
+
+
+        <!--Semantic ShareMenu Buttons-->
+        <semantic:closeAction>
+            <semantic:CloseAction
+                    id="closeColumn"
+                    press=".onCloseDetailPress"/>
+        </semantic:closeAction>
+
+        <semantic:fullScreenAction>
+            <semantic:FullScreenAction
+                    id="enterFullScreen"
+                    visible="{= !${device>/system/phone} &amp;&amp; !${appView>/actionButtonsInfo/midColumn/fullScreen}}"
+                    press=".toggleFullScreen"/>
+        </semantic:fullScreenAction>
+        <semantic:exitFullScreenAction>
+            <semantic:ExitFullScreenAction
+                    id="exitFullScreen"
+                    visible="{= !${device>/system/phone} &amp;&amp; ${appView>/actionButtonsInfo/midColumn/fullScreen}}"
+                    press=".toggleFullScreen"/>
+        </semantic:exitFullScreenAction>
+        
+
+    </semantic:SemanticPage>
+
+</mvc:View>

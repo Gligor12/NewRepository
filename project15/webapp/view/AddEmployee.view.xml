@@ -1,0 +1,32 @@
+<mvc:View
+    controllerName="opensap.project1.controller.AddEmployee"
+    xmlns="sap.m"
+    xmlns:semantic="sap.f.semantic"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc">
+    <semantic:SemanticPage  
+        showFooter="true" >
+        <semantic:titleHeading >
+                <Title text="{i18n>addEmployeeTitle}" ></Title>
+        </semantic:titleHeading>
+        <semantic:content>
+            <f:SimpleForm title="{i18n>addEmployeeFormTitle}" >
+                <f:content>
+                    <Label text="{i18n>firstNameLabel}" class="sapUiTinyMarginTop" />
+                    <Input id="firstName" required="true" value="{Name1}" />
+                    <Label text="{i18n>lastNameLabel}" class="sapUiTinyMarginTop" />
+                    <Input id="lastName" required="true" value="{Name2}"/>
+                    <Label text="{i18n>streetLabel}" class="sapUiTinyMarginTop" />
+                    <Input id="street" required="true" value="{Street}"/>
+			    </f:content>
+            </f:SimpleForm>
+        </semantic:content>
+        <semantic:footerCustomActions>
+            <Button id="saveBtn" text="{i18n>saveButton}" press="onSave"></Button>
+        </semantic:footerCustomActions>
+        <semantic:footerCustomActions>
+            <Button id="cancelBtn" text="{i18n>cancelButton}" press="onCancel"></Button>
+        </semantic:footerCustomActions>
+        
+    </semantic:SemanticPage>
+</mvc:View>

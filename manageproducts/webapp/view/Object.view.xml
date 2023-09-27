@@ -1,0 +1,71 @@
+<mvc:View
+    controllerName="opensap.manageproducts.controller.Object"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:semantic="sap.f.semantic"
+    xmlns:f="sap.ui.layout.form">
+
+    <semantic:SemanticPage
+        id="page"
+        headerPinnable="false"
+        toggleHeaderOnTitleClick="false"
+        busy="{objectView>/busy}"
+        busyIndicatorDelay="{objectView>/delay}">
+
+        <semantic:titleHeading>
+            <Title
+                text="{ProductID}"
+                level="H2"/>
+        </semantic:titleHeading>
+
+        <semantic:headerContent>
+            <ObjectNumber
+                number="{
+                    path: 'Price',
+                    formatter: '.formatter.numberUnit'
+                }"
+                unit="{CurrencyCode}" />
+                <ObjectAttribute text="{Name}"></ObjectAttribute>
+
+                 <Panel class="sapUiResponsiveMargin" width="auto" expandable="{device>/system/phone}" expanded="true" headerText="Product">
+                <content>
+                    <f:SimpleForm id="objectForm">
+                        <f:content>
+                            <Label text="Category" />
+                            <Text text="{Category}"></Text>
+                            <Label text="Name" />
+                            <Text text="{Name}"></Text>
+                            <Label text="Product Weight"></Label>
+                            <Text text="{WeightMeasure} {WeightUnit}" />
+                        </f:content>
+                    </f:SimpleForm>
+                </content>
+            </Panel>
+
+            <Panel class="sapUiResponsiveMargin" width="auto" expandable="{device>/system/phone}" expanded="false" headerText="Supplier">
+                <content>
+                    <List >
+                        <items>
+                            <StandardListItem icon="sap-icon://building" 
+                            title="{ToSupplier/CompanyName}"/>
+                            <StandardListItem icon="sap-icon://email" 
+                            title="{ToSupplier/EmailAddress}"/>
+                            <StandardListItem icon="sap-icon://world" 
+                            title="{ToSupplier/WebAddress}"/>
+                            <StandardListItem icon="sap-icon://phone" 
+                            title="{ToSupplier/PhoneNumber}"/>
+                            <StandardListItem icon="sap-icon://map" 
+                            title="{ToSupplier/Address/City}"/>
+                        </items>
+                    </List>
+                </content>
+            </Panel>
+        </semantic:headerContent>
+
+        <semantic:sendEmailAction>
+            <semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+        </semantic:sendEmailAction>
+
+    </semantic:SemanticPage>
+
+</mvc:View>

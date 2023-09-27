@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZFIORI_DEMO_ODATA_AM_SRV_01" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="Head" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdHead"/>
+                </Key>
+                <Property Name="IdHead" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Employee Id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Name1" Type="Edm.String" Nullable="false" MaxLength="55" sap:unicode="false" sap:label="First Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Name2" Type="Edm.String" Nullable="false" MaxLength="55" sap:unicode="false" sap:label="Last Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Street" Type="Edm.String" Nullable="false" MaxLength="55" sap:unicode="false" sap:label="Street" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="H2P" Relationship="ZFIORI_DEMO_ODATA_AM_SRV_01.Head2Projects" FromRole="FromRole_Head2Projects" ToRole="ToRole_Head2Projects"/>
+                <NavigationProperty Name="H2S" Relationship="ZFIORI_DEMO_ODATA_AM_SRV_01.Head2Skills" FromRole="FromRole_Head2Skills" ToRole="ToRole_Head2Skills"/>
+            </EntityType>
+            <EntityType Name="Projects" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdHead"/>
+                    <PropertyRef Name="IdProjects"/>
+                </Key>
+                <Property Name="IdHead" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Employee Id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IdProjects" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Project Id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Topic" Type="Edm.String" Nullable="false" MaxLength="55" sap:unicode="false" sap:label="Project Topic" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Projname" Type="Edm.String" Nullable="false" MaxLength="55" sap:unicode="false" sap:label="Project Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Periodoftime" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Period of time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Customer" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Customer" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="55" sap:unicode="false" sap:label="Project status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Skills" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdHead"/>
+                    <PropertyRef Name="IdSkills"/>
+                </Key>
+                <Property Name="IdHead" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Employee Id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IdSkills" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Skill Id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Topic" Type="Edm.String" Nullable="false" MaxLength="55" sap:unicode="false" sap:label="Topic" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="55" sap:unicode="false" sap:label="SKILL NAME" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Edate" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="EXAM DATE" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dlevel" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="DEGREE OF EXEPRTISE" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ZfioriDlevelSh" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Dlevel"/>
+                </Key>
+                <Property Name="Dlevel" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Dlevel" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dlvltxt" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Level text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="Head2Projects" sap:content-version="1">
+                <End Type="ZFIORI_DEMO_ODATA_AM_SRV_01.Head" Multiplicity="1" Role="FromRole_Head2Projects"/>
+                <End Type="ZFIORI_DEMO_ODATA_AM_SRV_01.Projects" Multiplicity="*" Role="ToRole_Head2Projects"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Head2Projects">
+                        <PropertyRef Name="IdHead"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Head2Projects">
+                        <PropertyRef Name="IdHead"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Head2Skills" sap:content-version="1">
+                <End Type="ZFIORI_DEMO_ODATA_AM_SRV_01.Head" Multiplicity="1" Role="FromRole_Head2Skills"/>
+                <End Type="ZFIORI_DEMO_ODATA_AM_SRV_01.Skills" Multiplicity="*" Role="ToRole_Head2Skills"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Head2Skills">
+                        <PropertyRef Name="IdHead"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Head2Skills">
+                        <PropertyRef Name="IdHead"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZFIORI_DEMO_ODATA_AM_SRV_01_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="HeadSet" EntityType="ZFIORI_DEMO_ODATA_AM_SRV_01.Head" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ProjectsSet" EntityType="ZFIORI_DEMO_ODATA_AM_SRV_01.Projects" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="SkillsSet" EntityType="ZFIORI_DEMO_ODATA_AM_SRV_01.Skills" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ZfioriDlevelShSet" EntityType="ZFIORI_DEMO_ODATA_AM_SRV_01.ZfioriDlevelSh" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="Head2ProjectsSet" Association="ZFIORI_DEMO_ODATA_AM_SRV_01.Head2Projects" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="HeadSet" Role="FromRole_Head2Projects"/>
+                    <End EntitySet="ProjectsSet" Role="ToRole_Head2Projects"/>
+                </AssociationSet>
+                <AssociationSet Name="Head2SkillsSet" Association="ZFIORI_DEMO_ODATA_AM_SRV_01.Head2Skills" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="HeadSet" Role="FromRole_Head2Skills"/>
+                    <End EntitySet="SkillsSet" Role="ToRole_Head2Skills"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="http://vhcalnplci:8000/sap/opu/odata/sap/ZFIORI_DEMO_ODATA_AM_SRV_01/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://vhcalnplci:8000/sap/opu/odata/sap/ZFIORI_DEMO_ODATA_AM_SRV_01/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,41 @@
+<mvc:View
+    controllerName="opensap.project1.controller.AddSkill"
+    xmlns="sap.m"
+    xmlns:semantic="sap.f.semantic"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+
+    <semantic:SemanticPage showFooter="true">
+            <semantic:titleHeading >
+                <Title text="{i18n>addSkillTitle}" ></Title>
+            </semantic:titleHeading>
+            <semantic:content>
+                <f:SimpleForm title="{i18n>addSkillFormTitle}">
+                    <f:content>
+                    <Label text="{i18n>skillNameLabel}" />
+                    <Input id="skillName" required="true" value="{Name}" />
+                    <Label text="{i18n>skillDateLabel}" />
+                    <DateTimePicker id="date" required="true" value="{ path : 'Edate',
+                        type: 'sap.ui.model.type.DateTime' }"/>
+                    <Label text="{i18n>skillTopicLabel}" />
+                    <Input id="topic" required="true" value="{Topic}"/>
+                    <Label text="{i18n>skillLevelLabel}" />
+                    <ComboBox id="skillLevel" required="true" items="{/ZfioriDlevelShSet}" selectedKey="{Dlevel}" >
+                        <items >
+                            <core:ListItem  key="{Dlevel}" text="{Dlvltxt}" ></core:ListItem>
+                        </items>
+                    </ComboBox>
+                    
+			    </f:content>
+                </f:SimpleForm>
+            </semantic:content>
+            <semantic:footerCustomActions>
+                <Button id="saveSkill" text="{i18n>saveButton}" press="onSaveSkill" />
+            </semantic:footerCustomActions>
+            <semantic:footerCustomActions>
+                <Button id="cancel" text="{i18n>cancelButton}" press="onCancel" />
+            </semantic:footerCustomActions>
+        </semantic:SemanticPage>
+
+</mvc:View>
